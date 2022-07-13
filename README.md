@@ -1,2 +1,4 @@
-# DQN_agent
-This repository contains the DQN agent used in my master this. Might apply it to different video games and improve it further.
+# DQN_agent_bechmark
+
+
+This repository contains the code used to create and evaluate the DQN Agents discussed in my Master Thesis. 
