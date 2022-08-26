@@ -14,9 +14,11 @@ class PrioritizedExperienceReplayBuffer:
         self._batch_size = batch_size
         self._buffer_size = buffer_size
         self._buffer_length = 0
-        self._buffer = np.empty(self._buffer_size, dtype=[("priority", np.float32), ("experience", Experience)])
+        self._buffer = np.empty(self._buffer_size, dtype=[(
+            "priority", np.float32), ("experience", Experience)])
         self._alpha = alpha
-        self._random_state = np.random.RandomState() if random_state is None else random_state
+        self._random_state = np.random.RandomState(
+        ) if random_state is None else random_state
 
     def __len__(self) -> int:
         return self._buffer_length

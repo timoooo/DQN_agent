@@ -1,4 +1,4 @@
-from attr import dataclass
+from dataclasses import dataclass
 import numpy as np
 import torch
 import os
@@ -68,5 +68,6 @@ def send_experiences_to_device(experiences):
         _to_device([e.action for e in experiences], dtype="long"),
         _to_device([e.reward for e in experiences], dtype="float"),
         _to_device([e.next_state for e in experiences], dtype="float"),
-        _to_device([e.done for e in experiences], dtype="float", to_uint8=True),
+        _to_device([e.done for e in experiences],
+                   dtype="float", to_uint8=True),
     )

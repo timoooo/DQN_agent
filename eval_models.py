@@ -12,7 +12,6 @@ from Agent.experience import Experience
 PATH_TO_SAVE = "/home/tmo/Projects/DRL_masterthesis/results/"
 
 
-
 def save_to_csv(fname, results):
     try:
         df = pd.DataFrame(results)
@@ -47,7 +46,8 @@ def inner_train_loop(agent, env, max_num_episodes, score_to_solve, agent_name):
         while not done:
             action = agent.act(state, eps)
             next_state, reward, done, _ = env.step(action)
-            experience = Experience(state=state, action=action, next_state=next_state, reward=reward, done=done)
+            experience = Experience(
+                state=state, action=action, next_state=next_state, reward=reward, done=done)
             agent.step(experience)
             agent.learn(beta)
 
@@ -60,7 +60,8 @@ def inner_train_loop(agent, env, max_num_episodes, score_to_solve, agent_name):
         print('\rEpisode {}\tAverage Score: {:.2f} Epsilon {} Beta {}'.format(i, np.mean(scores_window), eps, beta),
               end="")
         if i > max_num_episodes:
-            torch.save(agent.network.state_dict(), PATH_TO_SAVE + "checkpoints/" + agent_name + '.pth')
+            torch.save(agent.network.state_dict(), PATH_TO_SAVE +
+                       "checkpoints/" + agent_name + '.pth')
             return save_to_csv(fname=agent_name, results=results)
         row = {
             "episode": i,
@@ -77,8 +78,8 @@ if __name__ == '__main__':
     #   value is the score to solve the environment
     env_dict = {"MountainCar-v0": -134,
                 "CartPole-v1": 195,
-                 "LunarLander-v2": 200,
-                 "Acrobot-v1": -60.00
+                "LunarLander-v2": 200,
+                "Acrobot-v1": -60.00
                 }
 
     # AGENT initializes the agent with the hyperparameters
